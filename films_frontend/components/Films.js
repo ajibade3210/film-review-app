@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Films = ({ films }) => {
     return (
         <>
@@ -6,7 +8,7 @@ const Films = ({ films }) => {
                 films.data.map(film=> {
                     return (
                         <li key={film.id}>
-                            <a href={`film/` + film.id}>{film.attributes.title}</a>
+                            <Link href={`film/` + film.attributes.slug}>{film.attributes.title}</Link>
                         </li>
                     )
                 })}
