@@ -1,9 +1,10 @@
 import Head from "next/head";
+import { UserProvider } from "../lib/authContext";
 import Nav from "./Nav";
 
-const Layout = ({ children }) => {
+const Layout = ({ user, loading = false, children }) => {
     return (
-    <>
+    <UserProvider value={{ user, loading}} >
         <Head>
             <title>Film Database</title>
         </Head>
@@ -23,8 +24,13 @@ const Layout = ({ children }) => {
 <div className="text-2xl font-medium">{children}</div>
             </div>
         </main>
-    </>
+    </UserProvider>
     )
 }
 
 export default Layout;
+
+/**
+ * To make user avaliable in the whole application
+ * we user the UserProvider hook
+ */
