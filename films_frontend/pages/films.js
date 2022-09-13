@@ -3,8 +3,10 @@ import Layout from "../components/Layout"
 import { fetcher } from "../lib/api";
 import useSWR from "swr";
 import { useState } from "react";
+import { useFetchUser } from "../lib/authContext";
 
 const FilmsList = ({ films }) => {
+  const {user, loading} = useFetchUser();
     const [pageIndex, setPageIndex] = useState(1);
     const {data} = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/films?pagination[page]=${pageIndex}&pagination[pageSize]=5`,
     fetcher,
@@ -13,7 +15,7 @@ const FilmsList = ({ films }) => {
     });
 
     return (
-      <Layout>
+      <Layout user={user}>
         <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter mb-4">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 py-2">
             Films
